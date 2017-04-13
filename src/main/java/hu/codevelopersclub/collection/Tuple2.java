@@ -39,8 +39,16 @@ public class Tuple2<A,B> {
 
     @Override
     public int hashCode() {
-        int result = left.hashCode();
-        result = 31 * result + right.hashCode();
+        int result = left == null ? 127 : left.hashCode();
+        result = 31 * result + (right == null?  131: right.hashCode());
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Tuple2("
+                + left + " , "
+                 + right +
+                ')';
     }
 }
