@@ -53,6 +53,6 @@ public class CollectionSqlHelperTest {
                         new Tuple2<Integer, Integer>(2, 4),
                         new Tuple2<Integer, Integer>(3, 6)
                 );
-        Assert.assertEquals(expected, CollectionSqlHelper.rightOuterJoin(aList, bList, joinOn));
+        Assert.assertEquals(expected, CollectionSqlHelper.rightOuterJoin(aList, bList, (a,b) ->joinOn.apply(b,a)));
     }
 }

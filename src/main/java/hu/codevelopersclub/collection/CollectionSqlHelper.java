@@ -41,9 +41,9 @@ public class CollectionSqlHelper {
     public static <A, B> List<Tuple2<A, B>> rightOuterJoin(
             Collection<A> aCollection,
             Collection<B> bCollection,
-            BiFunction<A, B, Boolean> joinOn) {
+            BiFunction<B, A, Boolean> joinOn) {
         List<Tuple2<B,List<A>>> middle =
-                bCollection.stream().map(x -> new Tuple2<>(x, getAssociated(x,aCollection,(a,b) ->joinOn.apply(b,a)))).collect(Collectors.toList());
+                bCollection.stream().map(x -> new Tuple2<>(x, getAssociated(x,aCollection,joinOn))).collect(Collectors.toList());
         return middle.stream()
                 .flatMap(x-> x.getRight().stream().map(a -> new Tuple2<>(a,x.getLeft()))).collect(Collectors.toList());
     }
