@@ -9,13 +9,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
 
-public class CollectionSqlHelperTest {
+public class SimpleDataTest {
     private List<Integer> aList;
     private List<Integer> bList;
-    BiFunction<Integer,Integer,Boolean> joinOn;
+    BiFunction<Integer, Integer, Boolean> joinOn;
 
     @Before
-    public void buildUp(){
+    public void buildUp() {
         aList = new ArrayList<>(Arrays.asList(1, 2, 3));
         bList = new ArrayList<>(Arrays.asList(1, 4, 6));
         joinOn = (a, b) -> (2 * a == b);
@@ -38,7 +38,7 @@ public class CollectionSqlHelperTest {
     public void leftOuterJoinTest() {
         List<Tuple2<Integer, Integer>> expected =
                 Arrays.asList(
-                        new Tuple2<Integer,Integer>(1,null),
+                        new Tuple2<Integer, Integer>(1, null),
                         new Tuple2<Integer, Integer>(2, 4),
                         new Tuple2<Integer, Integer>(3, 6)
                 );
@@ -46,13 +46,13 @@ public class CollectionSqlHelperTest {
     }
 
     @Test
-    public void rightOuterJoinTest(){
+    public void rightOuterJoinTest() {
         List<Tuple2<Integer, Integer>> expected =
                 Arrays.asList(
-                        new Tuple2<Integer,Integer>(null,1),
+                        new Tuple2<Integer, Integer>(null, 1),
                         new Tuple2<Integer, Integer>(2, 4),
                         new Tuple2<Integer, Integer>(3, 6)
                 );
-        Assert.assertEquals(expected, CollectionSqlHelper.rightOuterJoin(aList, bList, (a,b) ->joinOn.apply(b,a)));
+        Assert.assertEquals(expected, CollectionSqlHelper.rightOuterJoin(aList, bList, (a, b) -> joinOn.apply(b, a)));
     }
 }
