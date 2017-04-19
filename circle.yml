@@ -4,4 +4,4 @@ general:
       - master
 
   artifacts:
-    - "target/*.jar"
+    - "target/"
